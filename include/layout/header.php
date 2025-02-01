@@ -33,14 +33,25 @@ $result = $connection->query("SELECT * FROM categories");
             <header
                 class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"
             >
-                <a
-                    href="index.html"
-                    class="fs-4 fw-medium link-body-emphasis text-decoration-none"
-                >
-                    webprog.io
-                </a>
+
+            <a
+                        href="index.php"
+                        class="fs-4 fw-medium link-body-emphasis text-decoration-none"
+                    >
+                        Dornacode.ir
+                    </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
-                    
+                    <?php foreach($result as $row): ?>
+                        <a
+                            href="#"
+                            class="me-3 py-2 link-body-emphasis text-decoration-none"
+                        >
+                            <?php echo $row['title']; ?>
+                        </a>
+                    <?php endforeach; ?>
                 </nav>
             </header>
+
+
+            
