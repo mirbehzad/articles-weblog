@@ -1,6 +1,6 @@
 <?php
 
-include '../db.php';
+include './include/db.php';
 
 $result = $connection->query("SELECT * FROM categories");
 
