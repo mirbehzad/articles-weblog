@@ -1,4 +1,10 @@
+<?php
 
+include '../db.php';
+
+$result = $connection->query("SELECT * FROM categories");
+
+?>
 
 
 <!DOCTYPE html>
@@ -35,25 +41,6 @@
                 </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
-                    <a
-                        class="fw-bold me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >طبیعت</a
-                    >
-                    <a
-                        class="me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >گردشگری</a
-                    >
-                    <a
-                        class="me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >تکنولوژی</a
-                    >
-                    <a
-                        class="me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >متفرقه</a
-                    >
+                    
                 </nav>
             </header>
