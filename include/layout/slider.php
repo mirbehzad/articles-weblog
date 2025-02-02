@@ -29,11 +29,12 @@
                             <?php if($result->num_rows > 0): 
                                 foreach($result as $slider):
                                         $postId = $slider['post_id'];
+                                        $sliderActive = $slider['active'];
                                         $posts = $connection->query("SELECT * FROM posts WHERE id = $postId");
                                         foreach($posts as $post):
                                     ?>
                             <div
-                                class="carousel-item overlay carousel-height active"
+                                class="carousel-item overlay carousel-height <?= $sliderActive ? 'active' : ''  ?>"
                             >
                                 <img
                                     src="./uploads/posts/<?php echo $post['image']; ?>"
@@ -41,8 +42,8 @@
                                     alt="post-image"
                                 />
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5> <?php echo $post['title']; ?></h5>
-                                    <p> <?php echo $post['body']; ?></p>
+                                    <h5> <?=  $post['title']; ?></h5>
+                                    <p> <?=  substr($post['body'],0,200)."..."; ?></p>
                                 </div>
                             </div>
                             <?php 
