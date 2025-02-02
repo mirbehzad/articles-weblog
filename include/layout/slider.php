@@ -1,3 +1,8 @@
+<?php
+    $result = $connection->query("SELECT * FROM posts_slider");
+    
+?>
+
 
 
 <section>
@@ -21,50 +26,30 @@
                             ></button>
                         </div>
                         <div class="carousel-inner rounded">
+                            <?php if($result->num_rows > 0): 
+                                foreach($result as $slider):
+                                        $postId = $slider['post_id'];
+                                        $posts = $connection->query("SELECT * FROM posts WHERE id = $postId");
+                                        foreach($posts as $post):
+                                    ?>
                             <div
                                 class="carousel-item overlay carousel-height active"
                             >
                                 <img
-                                    src="./assets/images/1.jpg"
+                                    src="./assets/images/<?php echo $post['image']; ?>"
                                     class="d-block w-100"
                                     alt="post-image"
                                 />
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>لورم ایپسوم متن</h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی
-                                        نامفهوم از صنعت چاپ و با استفاده
-                                    </p>
+                                    <h5> <?php echo $post['title']; ?></h5>
+                                    <p> <?php echo $post['body']; ?></p>
                                 </div>
                             </div>
-                            <div class="carousel-item carousel-height overlay">
-                                <img
-                                    src="./assets/images/2.jpg"
-                                    class="d-block w-100"
-                                    alt="post-image"
-                                />
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>لورم ایپسوم متن</h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی
-                                        نامفهوم از صنعت چاپ و با استفاده
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="carousel-item carousel-height overlay">
-                                <img
-                                    src="./assets/images/3.jpg"
-                                    class="d-block w-100"
-                                    alt="post-image"
-                                />
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>لورم ایپسوم متن</h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی
-                                        نامفهوم از صنعت چاپ و با استفاده
-                                    </p>
-                                </div>
-                            </div>
+                            <?php 
+                                endforeach;
+                                endforeach;
+                                endif;
+                            ?>
                         </div>
                         <button
                             class="carousel-control-prev"

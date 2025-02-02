@@ -42,14 +42,17 @@ $result = $connection->query("SELECT * FROM categories");
                     </a>
 
                 <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
-                    <?php foreach($result as $row): ?>
+                    <?php if($result->num_rows > 0):
+                        foreach($result as $row): ?>
                         <a
                             href="#"
                             class="me-3 py-2 link-body-emphasis text-decoration-none"
                         >
                             <?php echo $row['title']; ?>
                         </a>
-                    <?php endforeach; ?>
+                    <?php endforeach;
+                        endif;
+                    ?>
                 </nav>
             </header>
 
