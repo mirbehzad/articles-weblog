@@ -36,7 +36,7 @@
                                 class="carousel-item overlay carousel-height active"
                             >
                                 <img
-                                    src="./assets/images/<?php echo $post['image']; ?>"
+                                    src="./uploads/posts/<?php echo $post['image']; ?>"
                                     class="d-block w-100"
                                     alt="post-image"
                                 />
