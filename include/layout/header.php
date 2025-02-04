@@ -45,8 +45,8 @@ $result = $connection->query("SELECT * FROM categories");
                     <?php if($result->num_rows > 0):
                         foreach($result as $row): ?>
                         <a
-                            href="#"
-                            class="me-3 py-2 link-body-emphasis text-decoration-none"
+                            href="index.php?category=<?= $row['id']; ?>"
+                            class="me-3 py-2 link-body-emphasis text-decoration-none <?= (isset($_GET['category'])) && $row['id'] == $_GET['category'] ? 'fw-bold' : '' ?>"
                         >
                             <?php echo $row['title']; ?>
                         </a>

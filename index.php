@@ -9,7 +9,14 @@ include 'include/layout/header.php';
                 <?php
 
                 include 'include/layout/slider.php';
-                $posts = $connection->query("SELECT * FROM posts");
+                if(isset($_GET['category'])){
+                    $categoryId = $_GET['category'];
+                    $posts = $connection->query("SELECT * FROM posts WHERE category_id = $categoryId");
+                }
+                else{
+                    $posts = $connection->query("SELECT * FROM posts");
+                }
+                
                 ?>
 
                 <!-- Content Section -->
