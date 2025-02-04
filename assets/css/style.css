@@ -69,3 +69,10 @@ body {
         height: 450px;
     }
 }
+
+.error{
+    background-color: rgb(255, 105, 105);
+    color:white;
+    padding:5px;
+    border-radius: 5px;
+}

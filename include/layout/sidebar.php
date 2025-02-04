@@ -48,29 +48,45 @@ $categories = $connection->query("SELECT * FROM categories");
                                 <div class="card-body">
                                     <p class="fw-bold fs-6">عضویت در خبرنامه</p>
 
-                                    <form>
+                                    <?php 
+                                        if(isset($_POST['submit'])){
+                                            if( !empty($_POST['name'] ) && !empty($_POST['email'])){
+                                                $name = trim($_POST['name']);
+                                                $email = trim($_POST['email']);
+                                                $connection->query("INSERT INTO subscribers (name,email) VALUES ('$name','$email')");
+                                                echo "اظلاعات با موفقیت ارسال شد";
+                                            }
+                                            else{ ?>
+                                                <p class="alert alert-danger " >اطلاعات را کامل وارد کنید</p>
+                                            <?php } 
+                                        }
+                                    ?>
+                                    
+                                        
+                                    <form  method="POST">
                                         <div class="mb-3">
-                                            <label class="form-label"
-                                                >نام</label
-                                            >
+                                            
+                                            <label class="form-label">نام</label>
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                name="name"
                                             />
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label"
-                                                >ایمیل</label
-                                            >
+                                            <label class="form-label">ایمیل</label>
+                                            
                                             <input
                                                 type="email"
                                                 class="form-control"
+                                                name="email"
                                             />
                                         </div>
                                         <div class="d-grid gap-2">
                                             <button
                                                 type="submit"
                                                 class="btn btn-secondary"
+                                                name="submit"
                                             >
                                                 ارسال
                                             </button>
