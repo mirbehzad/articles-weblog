@@ -59,7 +59,7 @@ include 'include/layout/header.php';
                                                             class="d-flex justify-content-between align-items-center"
                                                         >
                                                             <a
-                                                                href="single.html"
+                                                                href="single.php?postId= <?= $post['id']; ?>"
                                                                 class="btn btn-sm btn-dark"
                                                                 >مشاهده</a
                                                             >
