@@ -2,6 +2,7 @@
 
 include 'include/layout/header.php';
 
+
 ?>
 
             <main>
@@ -84,13 +85,34 @@ include 'include/layout/header.php';
             <!-- Comment Section -->
             <div class="col-8 mt-4">
                                     <!-- Comment Form -->
+
+                                    <?php
+                                        if(isset($_POST['submit'])){
+                                            if( !empty($_POST['name']) && !empty($_POST['comment'])){
+                                                $name = $_POST['name'];
+                                                $comment = $_POST['comment'];
+                                                $postId = $_GET['postId'];
+                                                $connection->query("INSERT INTO comments(name,comment,post_id) VALUES('$name','$comment','$postId')");
+                                    ?>
+                                                <div class="alert alert-success">کامنت با موفقیت ارسال شد</div>
+                                    <?php
+                                            }
+                                            else{
+                                    ?>
+                                                    <div class="alert alert-danger">لطفا نام و کامنت خود را وارد کنید</div>
+                                    <?php 
+                                                } 
+                                        
+                                            
+                                        }
+                                    ?>
                                     <div class="card">
                                         <div class="card-body">
                                             <p class="fw-bold fs-5">
                                                 ارسال کامنت
                                             </p>
 
-                                            <form>
+                                            <form method="post">
                                                 <div class="mb-3">
                                                     <label class="form-label"
                                                         >نام</label
@@ -98,6 +120,7 @@ include 'include/layout/header.php';
                                                     <input
                                                         type="text"
                                                         class="form-control"
+                                                        name="name"
                                                     />
                                                 </div>
                                                 <div class="mb-3">
@@ -107,11 +130,13 @@ include 'include/layout/header.php';
                                                     <textarea
                                                         class="form-control"
                                                         rows="3"
+                                                        name="comment"
                                                     ></textarea>
                                                 </div>
                                                 <button
                                                     type="submit"
                                                     class="btn btn-dark"
+                                                    name="submit"
                                                 >
                                                     ارسال
                                                 </button>
@@ -121,9 +146,18 @@ include 'include/layout/header.php';
 
                                     <hr class="mt-4" />
                                     <!-- Comment Content -->
-                                    <p class="fw-bold fs-6">تعداد کامنت : 3</p>
+
+                                        <?php 
+                                            $comments = $connection->query("SELECT * FROM comments WHERE post_id = $postId AND status = 1");
+                                            if($comments->num_rows > 0):
+                                        ?>
+
+                                    <p class="fw-bold fs-6 alert alert-primary">تعداد کامنت : <?= $comments->num_rows; ?></p>
 
                                     <div class="card bg-light-subtle mb-3">
+                                        <?php 
+                                            foreach($comments as $comment):
+                                        ?>
                                         <div class="card-body">
                                             <div
                                                 class="d-flex align-items-center"
@@ -138,69 +172,19 @@ include 'include/layout/header.php';
                                                 <h5
                                                     class="card-title me-2 mb-0"
                                                 >
-                                                    محمد صالحی
+                                                   <?= $comment['name']; ?>
                                                 </h5>
                                             </div>
 
                                             <p class="card-text pt-3 pr-3">
-                                                لورم ایپسوم متن ساختگی با تولید
-                                                سادگی نامفهوم از صنعت چاپ و با
-                                                استفاده از طراحان گرافیک است.
+                                              <?= $comment['comment']; ?>
                                             </p>
                                         </div>
+                                        <?php endforeach; ?>
                                     </div>
-
-                                    <div class="card bg-light-subtle mb-3">
-                                        <div class="card-body">
-                                            <div
-                                                class="d-flex align-items-center"
-                                            >
-                                                <img
-                                                    src="./assets/images/profile.png"
-                                                    width="45"
-                                                    height="45"
-                                                    alt="user-profle"
-                                                />
-
-                                                <h5
-                                                    class="card-title me-2 mb-0"
-                                                >
-                                                    متین سیدی
-                                                </h5>
-                                            </div>
-
-                                            <p class="card-text pt-3 pr-3">
-                                                لورم ایپسوم متن ساختگی با تولید
-                                                سادگی نامفهوم از صنعت چاپ
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card bg-light-subtle mb-3">
-                                        <div class="card-body">
-                                            <div
-                                                class="d-flex align-items-center"
-                                            >
-                                                <img
-                                                    src="./assets/images/profile.png"
-                                                    width="45"
-                                                    height="45"
-                                                    alt="user-profle"
-                                                />
-
-                                                <h5
-                                                    class="card-title me-2 mb-0"
-                                                >
-                                                    زهرا عزیزی
-                                                </h5>
-                                            </div>
-
-                                            <p class="card-text pt-3 pr-3">
-                                                لورم ایپسوم متن ساختگی با تولید
-                                                سادگی
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <?php else: ?>
+                                        <div class="alert alert-secondary">کامنتی برای این پست وجود ندارد</div>
+                                    <?php endif; ?>
                                 </div>
 
             <!-- Footer Section -->
