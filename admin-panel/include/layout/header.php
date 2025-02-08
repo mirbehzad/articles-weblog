@@ -1,4 +1,6 @@
-
+<?php 
+include 'include/db.php'; 
+?>
 
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
