@@ -32,10 +32,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                        $posts = $connection->query("SELECT * FROM posts LIMIT 5");
+                                        if($posts->num_rows > 0):
+                                            foreach($posts as $post):
+                                    ?>
                                     <tr>
-                                        <th>1</th>
-                                        <td>لورم ایپسوم متن ساختگی</td>
-                                        <td>علی شیخ</td>
+                                        <th><?= $post['id']; ?></th>
+                                        <td><?= $post['title']; ?></td>
+                                        <td><?= $post['author']; ?></td>
                                         <td>
                                             <a
                                                 href="#"
@@ -49,57 +54,11 @@
                                             >
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>لورم ایپسوم متن</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>لورم ایپسوم متن ساختگی</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>لورم ایپسوم</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
+                                    <?php 
+                                        endforeach;
+                                        endif;
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>

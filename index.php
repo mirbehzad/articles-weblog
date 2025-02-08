@@ -28,7 +28,8 @@ include 'include/layout/header.php';
                                 <?php if($posts->num_rows > 0){
                                      foreach($posts as $post):
                                         $categoryId = $post['category_id'];
-                                        $categories = $connection->query("SELECT* FROM categories WHERE id = $categoryId"); ?>
+                                        $categories = $connection->query("SELECT* FROM categories WHERE id = $categoryId"); 
+                                ?>
                                             <div class="col-sm-6">
                                                 <div class="card">
                                                     <img
