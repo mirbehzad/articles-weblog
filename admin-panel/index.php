@@ -5,8 +5,8 @@
     $categories = $connection->query("SELECT * FROM categories ORDER BY id DESC LIMIT 5 ");
 
     if(isset($_GET['entity']) && isset($_GET['action']) && isset($_GET['id'])){
+        $id = $_GET['id'];
         if($_GET['action'] == 'delete'){
-            $id = $_GET['id'];
             switch($_GET['entity']){
                 case 'post':
                     $connection->query("DELETE FROM posts WHERE id=$id");
@@ -18,6 +18,9 @@
                     $connection->query("DELETE FROM categories WHERE id=$id");
                     break;
             }
+        }
+        elseif($_GET['entity'] == 'comment' && $_GET['action'] == 'approve'){
+            $comment = $connection->query("UPDATE comments SET status=1 WHERE id=$id");
         }
     }   
 ?>
@@ -112,7 +115,7 @@
                                         <td>
                                             <a
                                                 href="index.php?entity=comment&action=approve&id=<?= $comment['id']; ?>"
-                                                class="btn btn-sm btn-outline-<?= ($comment['status']) ? 'dark disabled' : 'success' ; ?>"
+                                                class="btn btn-sm btn-outline-<?= ($comment['status']) ? 'success disabled' : 'primary' ; ?>"
                                                 ><?= ($comment['status']) ? 'تایید شده' : 'در انتظار تایید' ; ?></a
                                             >
                                             <a
