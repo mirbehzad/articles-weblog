@@ -3,6 +3,23 @@
     $posts = $connection->query("SELECT * FROM posts ORDER BY id DESC LIMIT 5 ");
     $comments = $connection->query("SELECT * FROM comments ORDER BY id DESC LIMIT 5 ");
     $categories = $connection->query("SELECT * FROM categories ORDER BY id DESC LIMIT 5 ");
+
+    if(isset($_GET['entity']) && isset($_GET['action']) && isset($_GET['id'])){
+        if($_GET['action'] == 'delete'){
+            $id = $_GET['id'];
+            switch($_GET['entity']){
+                case 'post':
+                    $connection->query("DELETE FROM posts WHERE id=$id");
+                    break;
+                case 'comment':
+                    $connection->query("DELETE FROM comments WHERE id=$id");
+                    break;
+                case 'category':
+                    $connection->query("DELETE FROM categories WHERE id=$id");
+                    break;
+            }
+        }
+    }   
 ?>
 
         <div class="container-fluid">
@@ -45,12 +62,12 @@
                                         <td><?= $post['author']; ?></td>
                                         <td>
                                             <a
-                                                href="#"
+                                                href="index.php?entity=post&action=edit&id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-dark"
                                                 >ویرایش</a
                                             >
                                             <a
-                                                href="#"
+                                                href="index.php?entity=post&action=delete&id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >
@@ -94,12 +111,12 @@
                                         <td><?= $comment['comment']; ?></td>
                                         <td>
                                             <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark <?= ($comment['status']) ? 'disabled' : '' ; ?>"
+                                                href="index.php?entity=comment&action=approve&id=<?= $comment['id']; ?>"
+                                                class="btn btn-sm btn-outline-<?= ($comment['status']) ? 'dark disabled' : 'success' ; ?>"
                                                 ><?= ($comment['status']) ? 'تایید شده' : 'در انتظار تایید' ; ?></a
                                             >
                                             <a
-                                                href="#"
+                                                href="index.php?entity=comment&action=delete&id=<?= $comment['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >
@@ -144,7 +161,7 @@
                                                 >ویرایش</a
                                             >
                                             <a
-                                                href="#"
+                                                href="index.php?entity=category&action=delete&id=<?= $category['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >
