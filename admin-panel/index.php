@@ -1,5 +1,8 @@
 <?php
     include 'include/layout/header.php';
+    $posts = $connection->query("SELECT * FROM posts ORDER BY id DESC LIMIT 5 ");
+    $comments = $connection->query("SELECT * FROM comments ORDER BY id DESC LIMIT 5 ");
+    $categories = $connection->query("SELECT * FROM categories ORDER BY id DESC LIMIT 5 ");
 ?>
 
         <div class="container-fluid">
@@ -33,7 +36,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $posts = $connection->query("SELECT * FROM posts LIMIT 5");
                                         if($posts->num_rows > 0):
                                             foreach($posts as $post):
                                     ?>
@@ -55,7 +57,11 @@
                                         </td>
                                     </tr>
                                     <?php 
+                                        
                                         endforeach;
+                                    else:?>
+                                        <div class="alert alert-danger">مقاله ای یافت نشد</div>
+                                    <?php
                                         endif;
                                     ?>
 
@@ -78,19 +84,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    if($comments->num_rows > 0):
+                                        foreach($comments as $comment):
+                                ?>
                                     <tr>
-                                        <th>1</th>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            لورم ایپسوم متن ساختگی با تولید
-                                            سادگی نامفهوم از صنعت چاپ و با
-                                            استفاده از طراحان گرافیک است.
-                                        </td>
+                                        <th><?= $comment['id']; ?></th>
+                                        <td><?= $comment['name']; ?></td>
+                                        <td><?= $comment['comment']; ?></td>
                                         <td>
                                             <a
                                                 href="#"
-                                                class="btn btn-sm btn-outline-dark disabled"
-                                                >تایید شده</a
+                                                class="btn btn-sm btn-outline-dark <?= ($comment['status']) ? 'disabled' : '' ; ?>"
+                                                ><?= ($comment['status']) ? 'تایید شده' : 'در انتظار تایید' ; ?></a
                                             >
                                             <a
                                                 href="#"
@@ -99,47 +105,13 @@
                                             >
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            لورم ایپسوم متن ساختگی با تولید
-                                            سادگی نامفهوم از صنعت چاپ و با
-                                            استفاده از طراحان گرافیک است.
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-info"
-                                                >در انتظار تایید</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            لورم ایپسوم متن ساختگی با تولید
-                                            سادگی نامفهوم از صنعت چاپ
-                                        </td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark disabled"
-                                                >تایید شده</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
+                                <?php
+                                        endforeach;
+                                    else:?>
+                                        <div class="alert alert-danger"> کامنتی یافت نشد</div>
+                                    <?php
+                                    endif;
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -158,9 +130,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    if($categories->num_rows > 0):
+                                        foreach($categories as $category):
+                                ?>
                                     <tr>
-                                        <th>1</th>
-                                        <td>طبیعت</td>
+                                        <th><?= $category['id']; ?></th>
+                                        <td><?= $category['title']; ?></td>
                                         <td>
                                             <a
                                                 href="#"
@@ -174,38 +150,13 @@
                                             >
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>گردشگری</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>متفرقه</td>
-                                        <td>
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
+                                <?php
+                                        endforeach;
+                                    else:?>
+                                        <div class="alert alert-danger">دسته بندی ای یافت نشد</div>
+                                    <?php
+                                    endif;
+                                ?>
                                 </tbody>
                             </table>
                         </div>
