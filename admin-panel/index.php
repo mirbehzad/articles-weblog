@@ -22,7 +22,9 @@
         elseif($_GET['entity'] == 'comment' && $_GET['action'] == 'approve'){
             $comment = $connection->query("UPDATE comments SET status=1 WHERE id=$id");
         }
+        header(header: 'location:index.php');
     }   
+
 ?>
 
         <div class="container-fluid">
