@@ -38,7 +38,7 @@
                                 <li class="nav-item">
                                     <a
                                         class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 <?= str_contains($path,'posts') ? 'text-secondary' : '' ?>"
-                                        href="/php_course_blog/admin-panel/pages/posts/posts.php"
+                                        href="/php_course_blog/admin-panel/pages/posts/index.php"
                                     >
                                         <i
                                             class="bi bi-file-earmark-image-fill fs-4 text-secondary"

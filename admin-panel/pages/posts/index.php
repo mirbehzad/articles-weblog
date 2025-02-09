@@ -1,5 +1,7 @@
 <?php
     include '../../include/layout/header.php';
+    $posts = $connection->query("SELECT * FROM posts ORDER BY id ");
+
 ?>
         <div class="container-fluid">
             <div class="row">
@@ -22,7 +24,7 @@
                      <!-- Posts -->
                      <div class="mt-4">
                         <div class="table-responsive small">
-                            <table class="table table-hover align-middle">
+                        <table class="table table-hover align-middle">
                                 <thead>
                                     <tr>
                                         <th>id</th>
@@ -32,74 +34,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                        if($posts->num_rows > 0):
+                                            foreach($posts as $post):
+                                    ?>
                                     <tr>
-                                        <th>1</th>
-                                        <td>لورم ایپسوم متن ساختگی</td>
-                                        <td>علی شیخ</td>
+                                        <th><?= $post['id']; ?></th>
+                                        <td><?= $post['title']; ?></td>
+                                        <td><?= $post['author']; ?></td>
                                         <td>
                                             <a
-                                                href="./edit.html"
+                                                href="index.php?entity=post&action=edit&id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-dark"
                                                 >ویرایش</a
                                             >
                                             <a
-                                                href="#"
+                                                href="index.php?entity=post&action=delete&id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <td>لورم ایپسوم متن</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="./edit.html"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <td>لورم ایپسوم متن ساختگی</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="./edit.html"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <td>لورم ایپسوم</td>
-                                        <td>علی شیخ</td>
-                                        <td>
-                                            <a
-                                                href="./edit.html"
-                                                class="btn btn-sm btn-outline-dark"
-                                                >ویرایش</a
-                                            >
-                                            <a
-                                                href="#"
-                                                class="btn btn-sm btn-outline-danger"
-                                                >حذف</a
-                                            >
-                                        </td>
-                                    </tr>
+                                    <?php 
+                                        
+                                        endforeach;
+                                    else:?>
+                                        <div class="alert alert-danger">مقاله ای یافت نشد</div>
+                                    <?php
+                                        endif;
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>
