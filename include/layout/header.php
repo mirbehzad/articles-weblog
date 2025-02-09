@@ -1,6 +1,10 @@
 <?php
-
-include './include/db.php';
+if(str_contains($_SERVER['REQUEST_URI'],'pages')){
+include '../../include/db.php';
+}
+else{
+    include './include/db.php';
+}
 
 $result = $connection->query("SELECT * FROM categories");
 
@@ -24,8 +28,11 @@ $result = $connection->query("SELECT * FROM categories");
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous"
         />
-
-        <link rel="stylesheet" href="./assets/css/style.css" />
+        <?php if(str_contains($_SERVER['REQUEST_URI'],'pages')): ?>
+        <link rel="stylesheet" href="../../assets/css/style.css" />
+        <?php else: ?>
+            <link rel="stylesheet" href="./assets/css/style.css" />
+        <?php endif; ?>
     </head>
 
     <body>

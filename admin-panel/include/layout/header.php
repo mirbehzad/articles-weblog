@@ -1,5 +1,10 @@
 <?php 
-include 'include/db.php'; 
+if(str_contains($_SERVER['REQUEST_URI'],'pages')){
+    include '../../include/db.php';
+    }
+else{
+    include './include/db.php';
+    }
 ?>
 
 <!DOCTYPE html>
