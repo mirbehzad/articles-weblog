@@ -1,4 +1,6 @@
-
+<?php
+    $path = $_SERVER['REQUEST_URI'];
+?>
 
 <div
                     class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary"
@@ -23,8 +25,8 @@
                             <ul class="nav flex-column pe-3">
                                 <li class="nav-item">
                                     <a
-                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 text-secondary"
-                                        href="index.html"
+                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 <?= str_contains($path,'pages') ? 'text-secondary' : '' ?>"
+                                        href="/php_course_blog/admin-panel/index.php"
                                     >
                                         <i
                                             class="bi bi-house-fill fs-4 text-secondary"
@@ -35,8 +37,8 @@
 
                                 <li class="nav-item">
                                     <a
-                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2"
-                                        href="./pages/posts/index.html"
+                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 <?= str_contains($path,'posts') ? 'text-secondary' : '' ?>"
+                                        href="/php_course_blog/admin-panel/pages/posts/posts.php"
                                     >
                                         <i
                                             class="bi bi-file-earmark-image-fill fs-4 text-secondary"
@@ -47,8 +49,8 @@
 
                                 <li class="nav-item">
                                     <a
-                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2"
-                                        href="./pages/categories/index.html"
+                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 <?= str_contains($path,'categories') ? 'text-secondary' : '' ?>"
+                                        href="/php_course_blog/admin-panel/pages/posts/categories.php"
                                     >
                                         <i
                                             class="bi bi-folder-fill fs-4 text-secondary"
@@ -60,8 +62,8 @@
 
                                 <li class="nav-item">
                                     <a
-                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2"
-                                        href="./pages/comments/index.html"
+                                        class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2 <?= str_contains($path,'comments') ? 'text-secondary' : '' ?>"
+                                        href="/php_course_blog/admin-panel/pages/posts/comments.php"
                                     >
                                         <i
                                             class="bi bi-chat-left-text-fill fs-4 text-secondary"

@@ -45,7 +45,7 @@ $categories = $connection->query("SELECT * FROM categories");
                                 </ul>
                             </div>
 
-                            <!-- Subscribue Section -->
+                            <!-- Subscribe Section -->
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <p class="fw-bold fs-6">عضویت در خبرنامه</p>
