@@ -1,7 +1,11 @@
 <?php
     include '../../include/layout/header.php';
-    $posts = $connection->query("SELECT * FROM posts ORDER BY id ");
-
+    $posts = $connection->query("SELECT * FROM posts ORDER BY id DESC");
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $connection->query("DELETE FROM posts WHERE id=$id");
+        header('location:index.php');
+    }
 ?>
         <div class="container-fluid">
             <div class="row">
@@ -15,7 +19,7 @@
                         <h1 class="fs-3 fw-bold">مقالات</h1>
 
                         <div class="btn-toolbar mb-2 mb-md-0">
-                            <a href="./create.html" class="btn btn-sm btn-dark">
+                            <a href="./create.php" class="btn btn-sm btn-dark">
                                 ایجاد مقاله
                             </a>
                         </div>
@@ -44,12 +48,12 @@
                                         <td><?= $post['author']; ?></td>
                                         <td>
                                             <a
-                                                href="index.php?entity=post&action=edit&id=<?= $post['id']; ?>"
+                                                href="edit.php"
                                                 class="btn btn-sm btn-outline-dark"
                                                 >ویرایش</a
                                             >
                                             <a
-                                                href="index.php?entity=post&action=delete&id=<?= $post['id']; ?>"
+                                                href="index.php?id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >
