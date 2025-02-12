@@ -2,13 +2,17 @@
     include '../../include/layout/header.php';
     if(isset($_POST['submit'])){
         if(!empty($_POST['post_title']) && !empty($_POST['post_author']) && !empty($_POST['post_body']) && !empty($_FILES['post_image']['name'])){
+
+            $tmpName = $_FILES['post_image']['tmp_name'];
+            $imageName = time()."-". $_FILES['post_image']['name'];
+            move_uploaded_file($tmpName,"../../../uploads/posts/$imageName");
+
             $postTitle = $_POST['post_title'];
             $postAuthor = $_POST['post_author'];
             $postCategoryId = $_POST['post_categoryId'];
-            $postImage = $_FILES['post_image']['name'];
             $postBody = $_POST['post_body'];
             $connection->query("INSERT INTO posts (title,body,category_id,author,image) 
-                VALUES('$postTitle','$postBody','$postCategoryId','$postAuthor','$postImage')");
+                VALUES('$postTitle','$postBody','$postCategoryId','$postAuthor','$imageName')");
             ?>
             <div class="alert alert-success">پست با موفقیت ایجاد شد</div>
         <?php

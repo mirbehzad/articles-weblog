@@ -25,8 +25,8 @@
                         </div>
                     </div>
 
-                     <!-- Posts -->
-                     <div class="mt-4">
+                    <!-- Posts -->
+                    <div class="mt-4">
                         <div class="table-responsive small">
                         <table class="table table-hover align-middle">
                                 <thead>
