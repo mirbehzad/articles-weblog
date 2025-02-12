@@ -5,17 +5,26 @@
 
             $tmpName = $_FILES['post_image']['tmp_name'];
             $imageName = time()."-". $_FILES['post_image']['name'];
-            move_uploaded_file($tmpName,"../../../uploads/posts/$imageName");
+            
 
             $postTitle = $_POST['post_title'];
             $postAuthor = $_POST['post_author'];
             $postCategoryId = $_POST['post_categoryId'];
             $postBody = $_POST['post_body'];
+
+            if(move_uploaded_file($tmpName,"../../../uploads/posts/$imageName")){
             $connection->query("INSERT INTO posts (title,body,category_id,author,image) 
                 VALUES('$postTitle','$postBody','$postCategoryId','$postAuthor','$imageName')");
-            ?>
-            <div class="alert alert-success">پست با موفقیت ایجاد شد</div>
-        <?php
+                ?>
+                <div class="alert alert-success">پست با موفقیت ایجاد شد</div>
+                <?php
+                header('location: create.php');
+            }
+            else{ ?>
+                <div class="alert alert-warning">آپلود عکس با مشکل مواجه شده</div>
+            <?php
+            }
+            
         }
         else{ 
             ?>

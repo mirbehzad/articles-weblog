@@ -48,7 +48,7 @@
                                         <td><?= $post['author']; ?></td>
                                         <td>
                                             <a
-                                                href="edit.php"
+                                                href="edit.php?id=<?= $post['id']; ?>"
                                                 class="btn btn-sm btn-outline-dark"
                                                 >ویرایش</a
                                             >
