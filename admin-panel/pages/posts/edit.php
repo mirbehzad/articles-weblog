@@ -91,7 +91,7 @@
                                         if($categories->num_rows > 0):
                                             foreach($categories as $category):
                                     ?>
-                                    <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                                    <option <?= $category['id'] == $post['category_id'] ? 'selected' : '' ?> value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
                                     <?php 
                                             endforeach;
                                         endif;
