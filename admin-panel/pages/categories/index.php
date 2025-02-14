@@ -1,7 +1,7 @@
 <?php 
 include '../../include/layout/header.php';
 
-$categories = $connection->query("SELECT * FROM categories");
+$categories = $connection->query("SELECT * FROM categories ORDER BY id DESC");
 
 if(isset($_GET['id'])){
     $categoryId = $_GET['id'];
@@ -72,4 +72,4 @@ if(isset($_GET['id'])){
             </div>
         </div>
 
-        <?php include '../../include/layout/footer.php'; ?>
+<?php include '../../include/layout/footer.php'; ?>
