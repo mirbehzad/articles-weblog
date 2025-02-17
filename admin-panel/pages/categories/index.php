@@ -49,7 +49,7 @@ if(isset($_GET['id'])){
                                         <td><?= $category['title']; ?></td>
                                         <td>
                                             <a
-                                                href="./edit.php"
+                                                href="./edit.php?id=<?= $category['id']; ?>"
                                                 class="btn btn-sm btn-outline-dark"
                                                 >ویرایش</a
                                             >
