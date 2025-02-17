@@ -2,26 +2,16 @@
     include '../../include/layout/header.php';
     $comments = $connection->query("SELECT * FROM comments ORDER BY id DESC ");
 
-    if(isset($_GET['entity']) && isset($_GET['action']) && isset($_GET['id'])){
+    if(isset($_GET['action']) && isset($_GET['id'])){
         $id = $_GET['id'];
         if($_GET['action'] == 'delete'){
-            switch($_GET['entity']){
-                case 'post':
-                    $connection->query("DELETE FROM posts WHERE id=$id");
-                    break;
-                case 'comment':
-                    $connection->query("DELETE FROM comments WHERE id=$id");
-                    break;
-                case 'category':
-                    $connection->query("DELETE FROM categories WHERE id=$id");
-                    break;
-            }
-        }
-        elseif($_GET['entity'] == 'comment' && $_GET['action'] == 'approve'){
-            $comment = $connection->query("UPDATE comments SET status=1 WHERE id=$id");
-        }
-        header(header: 'location:index.php');
+            $connection->query("DELETE FROM comments WHERE id=$id");
 
+        }
+        else{
+            $connection->query("UPDATE comments SET status=1 WHERE id = $id");
+        }  
+        header(header: 'location:index.php');
     }   
 ?>
 
@@ -61,12 +51,12 @@
                                         <td><?= $comment['comment']; ?></td>
                                         <td>
                                             <a
-                                                href="index.php?entity=comment&action=approve&id=<?= $comment['id']; ?>"
+                                                href="index.php?action=approve&id=<?= $comment['id']; ?>"
                                                 class="btn btn-sm btn-outline-<?= ($comment['status']) ? 'success disabled' : 'primary' ; ?>"
                                                 ><?= ($comment['status']) ? 'تایید شده' : 'در انتظار تایید' ; ?></a
                                             >
                                             <a
-                                                href="index.php?entity=comment&action=delete&id=<?= $comment['id']; ?>"
+                                                href="index.php?action=delete&id=<?= $comment['id']; ?>"
                                                 class="btn btn-sm btn-outline-danger"
                                                 >حذف</a
                                             >

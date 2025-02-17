@@ -87,7 +87,7 @@ include 'include/layout/header.php';
                                     <!-- Comment Form -->
 
                                     <?php
-                                        if(isset($_POST['submit'])){
+                                        if(isset($_POST['sendComment'])){
                                             if( !empty($_POST['name']) && !empty($_POST['comment'])){
                                                 $name = $_POST['name'];
                                                 $comment = $_POST['comment'];
@@ -136,7 +136,7 @@ include 'include/layout/header.php';
                                                 <button
                                                     type="submit"
                                                     class="btn btn-dark"
-                                                    name="submit"
+                                                    name="sendComment"
                                                 >
                                                     ارسال
                                                 </button>
