@@ -1,3 +1,34 @@
+<?php
+session_start();
+include '../../include/db.php';
+
+
+$emailError = '';
+$passwordError = '';
+$loginError = '';
+if(isset($_POST['login'])){
+    if(empty($_POST['email'])){
+        $emailError = 'لطفا ایمیل را وارد کنید';
+    }
+    if(empty($_POST['password'])){
+        $passwordError = 'لطفا رمز عبور را وارد کنید';
+    }
+    else{
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $users = $connection->query("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
+        $user = $users->fetch_assoc();
+        if($user == null){
+            $loginError = 'ایمیل یا رمز عبور اشتباه است';
+        }
+        else{
+            $_SESSION['email'] = $email;
+            header("location: ../../index.php");
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
     <head>
@@ -16,18 +47,22 @@
     </head>
     <body class="auth">
         <main class="form-signin w-100 m-auto">
-            <form>
+            <form method="post">
                 <div class="fs-2 fw-bold text-center mb-4">webprog.io</div>
+                <div class="text text-warning"><?= $loginError; ?></div>
                 <div class="mb-3">
                     <label class="form-label">ایمیل</label>
-                    <input type="email" class="form-control" />
+                    <input name="email" type="email" class="form-control" />
+                    <div class="text text-danger"><?= $emailError; ?></div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">رمز عبور</label>
-                    <input type="password" class="form-control" />
+                    <input name="password" type="password" class="form-control" />
+                    <div class="text text-danger"><?= $passwordError; ?></div>
+
                 </div>
-                <button class="w-100 btn btn-dark mt-4" type="submit">
+                <button name="login" class="w-100 btn btn-dark mt-4" type="submit">
                     ورود
                 </button>
             </form>
