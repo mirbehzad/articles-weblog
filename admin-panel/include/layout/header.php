@@ -1,10 +1,15 @@
 <?php 
+session_start();
 if(str_contains($_SERVER['REQUEST_URI'],'pages')){
     include '../../include/db.php';
     }
 else{
     include './include/db.php';
     }
+if(!isset($_SESSION['email'])){
+    header("location: /php_course_blog/admin-panel/pages/auth/login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
