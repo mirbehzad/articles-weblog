@@ -76,7 +76,7 @@
                                 <li class="nav-item">
                                     <a
                                         class="nav-link link-body-emphasis text-decoration-none d-flex align-items-center gap-2"
-                                        href="#"
+                                        href="/php_course_blog/admin-panel/pages/auth/logout.php"
                                     >
                                         <i
                                             class="bi bi-box-arrow-right fs-4 text-secondary"
